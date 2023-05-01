@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Word Count</title>
+    <link rel = "stylesheet" type="text/css" href = "{{ url_for('static', filename='crawling.css') }}">
+</head>
+<body>
+    <h1>Word Count</h1>
+    <form method="POST" action="/result">
+        <div class="dv1">
+            <label for="platform">platform:</label>
+            <input type="radio" name="platform" id="platform" value = "naver">naver<br>
+            <input type="radio" name="platform" id="platform" value = "daum">daum<br>
+            <input type="radio" name="platform" id="platform" value = "google">google<br>
+        </div>    
+        <div class="dv2">
+            
+            <label for="url">URL:</label>
+            <input type="text" name="url" id="url" required><br><br>
+            
+            <label for="spage">start_page:</label>
+            <input type="text" name="spage" id="spage" required value="1">
+            <label for="epage">end_page:</label>
+            <input type="text" name="epage" id="epage" required value="2"><br><br>
+           
+
+            <label for="keyword">Keyword:</label>
+            <input type="text" name="keyword1" id="keyword1" required><br><br>
+            <label for="keyword">Keyword:</label>
+            <input type="text" name="keyword2" id="keyword2" required><br><br>
+            <label for="keyword">Keyword:</label>
+            <input type="text" name="keyword3" id="keyword3" required><br><br>
+            <label for="keyword">Keyword:</label>
+            <input type="text" name="keyword4" id="keyword4" required><br><br>
+            <input type="submit" value="Analysis">
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Word Count Result</title>
+</head>
+<body>
+    <h1>총 "{{counttitle}}"개 기사 크롤링 됨</h1>
+    {% for title in article_titles %}
+        <p>"{{title}}"</p>
+    {% endfor %}
+    <!-- <h3>"{{article_titles}}"</h1> -->
+    <h3>"{{article_links}}"</h1>
+    <h3>Word Count Result</h1>
+    <p>The word "{{ keyword1 }}" appeared {{ count1 }} times in the content of the given URL.</p>
+    <p>The word "{{ keyword2 }}" appeared {{ count2 }} times in the content of the given URL.</p>
+    <p>The word "{{ keyword3 }}" appeared {{ count3 }} times in the content of the given URL.</p>
+    <p>The word "{{ keyword4 }}" appeared {{ count4 }} times in the content of the given URL.</p>
+
+    <p>most common "{{top_words}}"</p>
+
+    <h1>Word Cloud</h1>
+    <img src="{{ url_for('static', filename='wordcloud.png') }}" alt="Word Cloud">
+    
+    <a href="/">Go back</a>
+</body>
+</html>
