@@ -142,7 +142,53 @@ def platform_daum(url, start_page, end_page, keyword1, keyword2, keyword3, keywo
     return keywords_counts_df, word_counts,counttitle, keyword_counts1, keyword_counts2, keyword_counts3, keyword_counts4, keyword1, keyword2, keyword3, keyword4        
 
 def platform_naver(url, start_page, end_page, keyword1, keyword2, keyword3, keyword4):
-    pass
+    def load_url():
+        url_naver = url
+        html = requests.get(url_naver, headers={'User-Agent':'Mozilla/5.0'})
+        soup = BeautifulSoup(html.text, "html.parser")
+        return soup
+
+def collect_news(soup):
+    title = []
+    link_li = []
+    content_li= []
+    for i in range(1,5):
+        for j in range(1,5):
+            articles = soup.select(f'#main_content > div > div._persist > div:nth-child(1) > div:nth-child({i}) > div.cluster_body > ul > li:nth-child({j}) > div > a')
+            for article in articles:
+                link = article['href']
+                link_li.append(link)
+                # 제목
+                text = article.get_text()
+                title.append(text)
+                # 기사 페이지에 접속해서 HTML 파싱
+                article_html = requests.get(link, headers={'User-Agent':'Mozilla/5.0'})
+                article_soup = BeautifulSoup(article_html.text, "html.parser")
+                
+                # 기사 내용 가져오기
+                article_content = article_soup.select("#dic_area")
+                content_li.append(article_content)
+                # print(article_content)
+    print(link_li)
+    #section_body > ul.type06_headline > li:nth-child(1) > dl > dt:nth-child(2) > a
+    for i in range(1,5):
+        for j in range(1,5):
+            for k in range(1,5):
+                articles = soup.select(f'#section_body > ul:nth-child({i}) > li:nth-child({j}) > dl > dt:nth-child({k}) > a')
+                for article in articles:
+                    link = article['href']
+                    link_li.append(link)
+                    # 제목
+                    text = article.get_text()
+                    title.append(text)
+                    # 기사 페이지에 접속해서 HTML 파싱
+                    article_html = requests.get(link, headers={'User-Agent':'Mozilla/5.0'})
+                    article_soup = BeautifulSoup(article_html.text, "html.parser")
+                    
+                    # 기사 내용 가져오기
+                    article_content = article_soup.select("#dic_area")
+                    content_li.append(article_content)
+                    # print(article_content)
 
 
 
