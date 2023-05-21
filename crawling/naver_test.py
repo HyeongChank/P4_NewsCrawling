@@ -16,27 +16,45 @@ from bs4 import BeautifulSoup
 titles = []
 links = []
 article_contents = []
-def collect_news():
-    for i in range(1,5):
-        url = f'https://news.naver.com/main/main.naver?mode=LSD&mid=shm&sid1=105&page={i}'
+def naver_crawling(url, start_page, end_page):
+    for i in range(start_page,end_page):
+        url = f'{url}&page={i}'
         html = requests.get(url, headers={'User-Agent':'Mozilla/5.0'})
         soup = BeautifulSoup(html.text, "html.parser")
-        articles = soup.select('.sh_text')
+        # 헤드라인 뉴스
+        # articles = soup.select('.sh_text')
+        # print(articles)
+        # for ar in articles:
+        #     link = ar.find('a')['href']
+        #     links.append(link)
+        #     title = ar.find('a').text
+        #     # print(title)            
+        #     titles.append(title)
+        # # print(links)
+        # # print(titles)
+        # # 일반 뉴스
+        # articles = soup.select('.cluster_text')
+        # # print(articles)
+        # for ar in articles:
+        #     link = ar.find('a')['href']
+        #     links.append(link)
+        #     title = ar.find('a').text
+        #     # print(title)
+#section_body      
+#section_body > ul.type06_headline > li:nth-child(1) > dl > dt:nth-child(2) > a
+#.section_body > ul.type06_headline > li:nth-child(1) > dl > dt:nth-child(2) > a
+        articles = soup.select('#section_body > ul.type06_headline > li:nth-child(1) > dl > dt:nth-child(2) > a')
         print(articles)
-        for ar in articles:
-            link = ar.find('a')['href']
-            links.append(link)
-            title = ar.select('.sh_text_lede')
+        # for ar in articles:
+        #     link = ar.select('a')
+        #     print(link)
             
-            titles.append(title)
-        print(links)
-#         print(titles)
 # <div class="cluster_text">
 #                                         <div class="cluster_text_info" data-comment="{gno:'news001,0013950068',params:{sid1:'105'},nclicks:'cmt.count'}">
 #                                             <div class="cluster_text_press">연합뉴스</div>
 #                                         </div>
                                         
-#                                         <a href="https://n.news.naver.com/mnews/hotissue/article/001/0013950068?type=series&amp;cid=1087298" class="cluster_text_headline nclicks(itn.sera)"> "생쥐 간에 사람 간세포 이식했더니…생체리듬이 변했다"</a>
+#                                         <a href="C:\git clone\P_NewsCrawling\P4_NewsCrawling" class="cluster_text_headline nclicks(itn.sera)"> "생쥐 간에 사람 간세포 이식했더니…생체리듬이 변했다"</a>
 #                                     </div>
 # <a href="https://n.news.naver.com/mnews/hotissue/article/001/0013950068?type=series&amp;cid=1087298" class="cluster_text_headline nclicks(itn.sera)"> "생쥐 간에 사람 간세포 이식했더니…생체리듬이 변했다"</a>
         #     print(articles)
@@ -79,5 +97,7 @@ def collect_news():
         # print(len(title))
 
 if __name__=='__main__':
-
-    collect_news()
+    url = f'https://news.naver.com/main/main.naver?mode=LSD&mid=shm&sid1=105'
+    start_page = 1
+    end_page = 5
+    naver_crawling(url, start_page, end_page)
