@@ -141,12 +141,12 @@ def platform_daum(url, start_page, end_page, keyword1, keyword2, keyword3, keywo
 
     return keywords_counts_df, word_counts,counttitle, keyword_counts1, keyword_counts2, keyword_counts3, keyword_counts4, keyword1, keyword2, keyword3, keyword4        
 
-def platform_naver(url, start_page, end_page, keyword1, keyword2, keyword3, keyword4):
-    def load_url():
-        url_naver = url
-        html = requests.get(url_naver, headers={'User-Agent':'Mozilla/5.0'})
-        soup = BeautifulSoup(html.text, "html.parser")
-        return soup
+# def platform_naver(url, start_page, end_page, keyword1, keyword2, keyword3, keyword4):
+#     def load_url():
+#         url_naver = url
+#         html = requests.get(url_naver, headers={'User-Agent':'Mozilla/5.0'})
+#         soup = BeautifulSoup(html.text, "html.parser")
+#         return soup
 
 def collect_news(soup):
     title = []
